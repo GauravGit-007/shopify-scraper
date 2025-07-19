@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopify Scraper</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: #fff;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      color: #00ffcc;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="url"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 400px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .output-box {
+      width: 80%;
+      max-height: 400px;
+      overflow: auto;
+      background: #2e2e3e;
+      padding: 20px;
+      border-radius: 10px;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: pre;
+    }
+
+    a.download-link {
+      margin-top: 20px;
+      display: inline-block;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Shopify Store URL</h2>
+  <form method="POST">
+    <input type="url" name="website_url" placeholder="https://examplestore.myshopify.com" required>
+    <button type="submit">Scrape</button>
+  </form>
+    
+
+  {% if error %}
+    <p style="color:red">{{ error }}</p>
+  {% endif %}
+
+  {% if data %}
+    <div class="output-box">
+      {{ data | tojson(indent=2) }}
+    </div>
+    <a class="download-link" href="/download_csv">Download CSV</a>
+  {% endif %}
+</body>
+</html>
